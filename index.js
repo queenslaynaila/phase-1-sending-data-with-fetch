@@ -3,22 +3,27 @@ function submitData(name, email) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Accept": "application/json",
+      Accept: "application/json",
     },
     body: JSON.stringify({
-      name:name,
-      email:email,
+      name: name,
+      email: email,
     }),
   })
     .then(function (response) {
       return response.json();
     })
-    .then(function (object) {
-      document.body.innerHTML = object["id"];
+    .then(function (user) {
+      let id = user.id;
+      let p = document.createElement("p");
+      p.textContent = id;
+      document.body.appendChild(p);
     })
     .catch(function (error) {
-      document.body.innerHTML = error.message.toString();
+      let e = document.createElement("p");
+      e.textContent = error.message;
+      document.body.appendChild(e);
     });
 }
 
-submitData('St','steve@steve.com')
+submitData("Steve", "steve@steve.com");
